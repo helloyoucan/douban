@@ -1,0 +1,82 @@
+
+#movie-list {
+  box-sizing: border-box;
+  padding: 47px 5px 30px;
+  //height: calc(100% - 37px);
+  height: 100%;
+  margin-top: -42px;
+  overflow: auto;
+  font-size: 14px;
+}
+
+.movie-item {
+  padding-bottom: 15px;
+  color: #555;
+}
+
+.movie-img {
+  float: left;
+  width: 65px;
+  height: 100px;
+  img {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.movie-msg {
+  margin-left: 70px;
+}
+
+@mixin oneLine {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  span {
+    &:first-child ~ span:before {
+      content: '、';
+    }
+  }
+}
+
+.title {
+  font-size: 18px;
+  a:link, a:active {
+    margin-left: 5px;
+    color: #000;
+  }
+}
+
+.year {
+}
+
+.rating {
+
+}
+
+.genres {
+  @include oneLine;
+}
+
+.casts {
+  @include oneLine;
+}
+
+.directors {
+  @include oneLine;
+}
+
+@keyframes loading {
+  25% {
+    transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

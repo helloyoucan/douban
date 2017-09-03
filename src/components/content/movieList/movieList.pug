@@ -1,0 +1,21 @@
+ul
+    each s in subjects
+        li
+            div.movie-item
+                div.movie-img
+                    img(src=s.images.small)
+                div.movie-msg
+                    div.title #{s.title}
+                        span.year (#{s.year})
+                        a(href=s.alt target="_blank") 详细
+                    div.rating 评分:#{s.rating.average}
+                    div.genres 分类:
+                        each g in s.genres
+                            span #{g}
+                    div.casts 主演:
+                        each c in s.casts
+                            span #{c.name}
+                    div.directors 导演:
+                        each d in s.directors
+                            span #{d.name}
+
