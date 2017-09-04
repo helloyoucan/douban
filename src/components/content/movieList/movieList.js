@@ -10,6 +10,7 @@ let movie = {
     total: 0,
     isLoading: false,
     url: api.movie.hot,
+    q: ''
 }
 export default {
     init(){
@@ -99,18 +100,30 @@ export default {
     getHot(){
         movie.url = api.movie.hot;
         movie.currentStart = 0;
+        movie.q = '';
+        document.querySelector('#top input').value = '';
         this.init();
     },
     getNow(){
         movie.url = api.movie.now;
         movie.currentStart = 0;
+        movie.q = '';
+        document.querySelector('#top input').value = '';
         this.init();
     },
     getTop(){
         movie.url = api.movie.top;
         movie.currentStart = 0;
+        movie.q = '';
+        document.querySelector('#top input').value = '';
         this.init();
     },
+    search(key){
+        movie.url = api.movie.search;
+        movie.currentStart = 0;
+        movie.q = key;
+        this.init();
+    }
 
 }
 function _getData(opt) {
@@ -135,9 +148,13 @@ function _getData(opt) {
             }
         }
     };
+    let url = movie.url + '?start=' + movie.currentStart + '&count=' + movie.currentCount;
+    if (movie.q != '') {
+        url += '&q=' + movie.q;
+    }
     xhr.open(
         'get',
-        movie.url + '?start=' + movie.currentStart + '&count=' + movie.currentCount,
+        url,
         true
     );
     xhr.send();

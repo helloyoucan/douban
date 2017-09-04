@@ -15,12 +15,13 @@
   width: 300%;
   transform: translate(0%);
   transition: transform .5s;
-  & > div {
-    width: 33.3%;
-    float: left;
-    height: 100%;
-    overflow: hidden;
-  }
+}
+
+#movie, #music, #book {
+  width: 33.3%;
+  float: left;
+  height: 100%;
+  overflow: hidden;
 }
 
 #bottom {

@@ -4,7 +4,8 @@ import MovieList from './movieList/movieList';
 export default {
     tpl,
     init(){
-        (function () {//滑动切换
+        //滑动切换
+        (() => {
             let contentDom = document.querySelector('#content');
             let touchstart = {
                 x: 0,
@@ -24,9 +25,7 @@ export default {
                         x: e.changedTouches[0].pageX,
                         y: e.changedTouches[0].pageY
                     };
-                    let contentDom = document.querySelector("#content");
-                    let translate = contentDom.style.transform;
-                    translate = translate.slice(translate.indexOf('(') + 1, translate.indexOf(')') - 1);
+                    let translate = this.getTranslate();
                     let tab_itemDoms = document.querySelectorAll('.tab-item');
                     if (page.x > touchstart.x) {//右滑
                         if (page.x - touchstart.x > 70
@@ -74,14 +73,23 @@ export default {
         //渲染电影列表
         MovieList.init();
         //滑动加载
-        let movie_listDom = document.querySelector('#movie-list');
-        movie_listDom.addEventListener('scroll', (e) => {
-            if (!MovieList.getLoading() && movie_listDom.scrollHeight - movie_listDom.clientHeight - movie_listDom.scrollTop < 300) {
-                MovieList.getMoreData();
-            }
-        });
+        (() => {
+            let movie_listDom = document.querySelector('#movie-list');
+            let topDom = document.querySelector('#top');
+            movie_listDom.addEventListener('scroll', (e) => {
+                if (movie_listDom.scrollTop < 10) {
+                    topDom.classList.remove('hide-search');
+                } else if (!topDom.classList.contains('hide-search')
+                    && document.querySelector('#top input').value == '') {
+                    topDom.classList.add('hide-search');
+                }
+                if (!MovieList.getLoading() && movie_listDom.scrollHeight - movie_listDom.clientHeight - movie_listDom.scrollTop < 300) {
+                    MovieList.getMoreData();
+                }
+            });
+        })();
         //点击分类
-        (function () {
+        (() => {
             let movie_select = document.querySelector('#movie-select');
             let spanDoms = movie_select.querySelectorAll('span');
             movie_select.addEventListener('click', (e) => {
@@ -104,5 +112,10 @@ export default {
                 }
             });
         })();
+    },
+    getTranslate(){
+        let contentDom = document.querySelector("#content");
+        let translate = contentDom.style.transform;
+        return translate.slice(translate.indexOf('(') + 1, translate.indexOf(')') - 1);
     }
 }
