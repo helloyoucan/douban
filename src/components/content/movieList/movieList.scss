@@ -1,10 +1,10 @@
 
 #movie-list {
   box-sizing: border-box;
-  padding: 47px 5px 30px;
+  padding: 0 5px 30px;
   //height: calc(100% - 37px);
-  height: 100%;
-  margin-top: -42px;
+  height: calc(100% - 36px);
+  //margin-top: -42px;
   overflow: auto;
   font-size: 14px;
 }
