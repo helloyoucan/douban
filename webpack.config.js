@@ -1,7 +1,6 @@
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const WebpackDevServer = require('webpack-dev-server');
 module.exports = {
     //content: __dirname, //当前上下文目录路径
     entry: './src/app.js',
@@ -17,9 +16,9 @@ module.exports = {
         port: 8080,
         stats: { colors: true },
         proxy: {
-            '/douban': {
+            '/apis': {
                 target: 'https://api.douban.com/v2/',
-                pathRewrite: {'^/douban' : ''},
+                pathRewrite: {'^/apis' : ''},
                 secure: false,
                 changeOrigin: true
             }
