@@ -5,9 +5,11 @@
       width: 100%;
     }
     .search {
-      width: 0;
-      margin-left: calc(50% - 40px);
-      margin-right: calc(50% - 40px);
+      //width: 0;
+      //margin-left: calc(50% - 40px);
+      //margin-right: calc(50% - 40px);
+      z-index: -1;
+      opacity: 0;
       input {
         padding: 0;
       }
@@ -21,7 +23,7 @@
     position: absolute;
     width: 80px;
     left: 0;
-    transition: width 1.5s;
+    transition: width .5s;
   }
   .search {
     position: absolute;
@@ -29,7 +31,16 @@
     right: 0;
     width: calc(100% - 80px);
     margin-left: 0;
-    transition: width 1.5s, margin 1.5s;
+    opacity: 1;
+    z-index:0;
+    transition: {
+      property: opacity;
+      duration: 0s;
+      delay: .5s;
+      timing-function: linear;
+    }
+  ;
+    //transition: width 1.5s, margin 1.5s;
     overflow: hidden;
     &:after {
       clear: both;
@@ -58,7 +69,7 @@
       height: 26px;
       margin: 6px 0 6px -55px;
       padding: 6px;
-      transition: width 1.5s, margin 1.5s;
+      //transition: width 1.5s, margin 1.5s;
     }
   }
 

@@ -27,6 +27,7 @@ export default {
                     };
                     let translate = this.getTranslate();
                     let tab_itemDoms = document.querySelectorAll('.tab-item');
+                    let topDom = document.querySelector('#top');
                     if (page.x > touchstart.x) {//右滑
                         if (page.x - touchstart.x > 70
                             && Math.abs(page.y - touchstart.y) < 100) {
@@ -36,11 +37,15 @@ export default {
                                     translate = 0;
                                     tab_itemDoms[1].classList.remove('active');
                                     tab_itemDoms[0].classList.add('active');
+                                    if (movie_listDom.scrollTop < 10) {
+                                        topDom.classList.remove('hide-search');
+                                    }
                                     break;
                                 case '-66.6':
                                     translate = -33.3;
                                     tab_itemDoms[2].classList.remove('active');
                                     tab_itemDoms[1].classList.add('active');
+                                    topDom.classList.add('hide-search');
                                     break;
                             }
                             contentDom.style.transform = 'translate(' + translate + '%)';
@@ -56,11 +61,13 @@ export default {
                                         translate = -33.3;
                                         tab_itemDoms[0].classList.remove('active');
                                         tab_itemDoms[1].classList.add('active');
+                                        topDom.classList.add('hide-search');
                                         break;
                                     case '-33.3':
                                         translate = -66.6;
                                         tab_itemDoms[1].classList.remove('active');
                                         tab_itemDoms[2].classList.add('active');
+                                        topDom.classList.add('hide-search');
                                         break;
                                 }
                                 contentDom.style.transform = 'translate(' + translate + '%)';
@@ -73,8 +80,8 @@ export default {
         //渲染电影列表
         MovieList.init();
         //滑动加载
+        let movie_listDom = document.querySelector('#movie-list');
         (() => {
-            let movie_listDom = document.querySelector('#movie-list');
             let topDom = document.querySelector('#top');
             movie_listDom.addEventListener('scroll', (e) => {
                 if (movie_listDom.scrollTop < 10) {

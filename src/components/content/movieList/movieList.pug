@@ -8,6 +8,7 @@ ul
                     div.title #{s.title}
                         span.year (#{s.year})
                         a(href=s.alt target="_blank") 详细
+                    div.reads 看过人数 : #{s.collect_count}
                     div.rating 评分:#{s.rating.average}
                     div.genres 分类:
                         each g in s.genres
